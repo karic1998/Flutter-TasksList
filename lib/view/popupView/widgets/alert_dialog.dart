@@ -1,35 +1,34 @@
-// ignore_for_file: use_key_in_widget_constructors, unnecessary_new, prefer_const_constructors, duplicate_ignore, unused_import
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:task/data.dart';
-import 'package:task/main.dart';
-import 'task.dart';
-import 'zadatak.dart';
+import 'package:task/services/example.dart';
 
-class Popup extends StatefulWidget {
+class AlertDialogPopup extends StatefulWidget {
+  const AlertDialogPopup({Key? key}) : super(key: key);
+
   @override
-  _PopupState createState() => _PopupState();
+  _AlertDialogPopupState createState() => _AlertDialogPopupState();
 }
 
-class _PopupState extends State<Popup> {
-  final myController = TextEditingController();
+class _AlertDialogPopupState extends State<AlertDialogPopup> {
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
     return AlertDialog(
       //title: new Text("Alert Dialog title"),
       content: TextField(
-        controller: myController,
+        controller: subtaskNameController,
         decoration: const InputDecoration(
             border: OutlineInputBorder(), hintText: 'Item name'),
       ),
       actions: <Widget>[
         // usually buttons at the bottom of the dialog
+        // ignore: unnecessary_new
         new TextButton(
+          // ignore: unnecessary_new
           child: new Text("Add"),
           onPressed: () {
-            subtasks.add(Subtask(myController.text));
-            Navigator.of(context).pop();
+            Services().createSubTask(context, subtaskNameController.text);
           },
         ),
       ],
